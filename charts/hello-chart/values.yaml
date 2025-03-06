@@ -8,7 +8,7 @@ image:
 service:
   type: NodePort
   port: 8099
-  nodePort: 30690
+  nodePort: 30635
 
 ingress:
   enabled: false

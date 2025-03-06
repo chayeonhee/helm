@@ -29,25 +29,25 @@ pipeline {
                 }
             }
         }
-        stage('Deploy and Service to Kubernetes') {
-            steps {
-                script {
-                        // Kubernetes Deployment and Service 생성 및 적용 (1일차 교육때 사용한 deploy & service 생성 yaml 파일 등록하여 사용)
-                        // sh "kubectl apply -f ./yaml/demo-app.yaml -n ${NAMESPACE}"
-                        sh "kubectl apply -f ./yaml/app.yaml -n ${NAMESPACE}"
-                        // sh "kubectl rollout restart deployment/<deployment-name>"
-                        // image tag 변경 없이 적용하려면 pod 재시작
-                        sh "kubectl rollout restart deployment/springboot-cha -n ${NAMESPACE}"
-                }
-            }
-        }
-        stage('Deployment Image to Update') {
-            steps {
-                script {
-                    // Kubenetes에서 특정 Deployment의 컨테이너 이미지를 업데이트 (아래 이름은 중복되지 않게 주의하여 지정, deployment, selector 이름으로)
-                    sh "kubectl set image deployment/springboot-cha springboot-cha=${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG} --namespace=${NAMESPACE}"
-                }
-            }
-        }
+        // stage('Deploy and Service to Kubernetes') {
+        //     steps {
+        //         script {
+        //                 // Kubernetes Deployment and Service 생성 및 적용 (1일차 교육때 사용한 deploy & service 생성 yaml 파일 등록하여 사용)
+        //                 // sh "kubectl apply -f ./yaml/demo-app.yaml -n ${NAMESPACE}"
+        //                 sh "kubectl apply -f ./yaml/app.yaml -n ${NAMESPACE}"
+        //                 // sh "kubectl rollout restart deployment/<deployment-name>"
+        //                 // image tag 변경 없이 적용하려면 pod 재시작
+        //                 sh "kubectl rollout restart deployment/springboot-cha -n ${NAMESPACE}"
+        //         }
+        //     }
+        // }
+        // stage('Deployment Image to Update') {
+        //     steps {
+        //         script {
+        //             // Kubenetes에서 특정 Deployment의 컨테이너 이미지를 업데이트 (아래 이름은 중복되지 않게 주의하여 지정, deployment, selector 이름으로)
+        //             sh "kubectl set image deployment/springboot-cha springboot-cha=${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${IMAGE_TAG} --namespace=${NAMESPACE}"
+        //         }
+        //     }
+        // }
     }
 }
