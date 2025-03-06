@@ -41,6 +41,14 @@ pipeline {
         //         }
         //     }
         // }
+        //  stage('Deploy to Kubernetes (Helm)') {
+        //     steps {
+        //         script {
+        //             // Deploy to Kubernetes via Helm
+        //             sh "helm upgrade --install helloworld ./helm/ --set image.tag=${DOCKER_IMAGE}"
+        //         }
+        //     }
+        // }
         // stage('Deployment Image to Update') {
         //     steps {
         //         script {
