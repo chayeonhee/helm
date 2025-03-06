@@ -1,0 +1,5 @@
+#chart metadata
+apiVersion: v2
+name: springboot-hello-world
+description: A simple Spring Boot Hello World application
+version: 0.1.0

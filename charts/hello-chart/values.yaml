@@ -1,0 +1,23 @@
+#chart 기본설정
+replicaCount: 1
+
+image:
+  repository: k8s-vga-worker1:5000/group1-team6-cha-hello
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 8099
+  nodePort: 30690
+
+ingress:
+  enabled: false
+
+# 아래는 기본 설정으로 필요에 따라 추가 설정 가능합니다.
+# resources:
+#   limits:
+#     cpu: "500m"
+#     memory: "1Gi"
+#   requests:
+#     cpu: "250m"
+#     memory: "512Mi"

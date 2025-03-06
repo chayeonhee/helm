@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-cha
+  namespace: group1-team6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-cha
+  template:
+    metadata:
+      labels:
+        app: springboot-cha
+    spec:
+      containers:
+      - name: springboot-cha
+        image: k8s-vga-worker1:5000/group1-team6-cha-hello:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8099
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: team6-springboot-cha-sv
+  namespace: group1-team6
+spec:
+  selector:
+    app: springboot-cha
+  ports:
+    - protocol: TCP
+      port: 8080 # kube unique inner port
+      targetPort: 8099 #listen port, container port, Docker Expose port is equal
+      nodePort: 30690
+  type: NodePort
