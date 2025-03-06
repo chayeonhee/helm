@@ -1,6 +1,6 @@
 #chart 기본설정
 replicaCount: 1
-
+namespace: group1-team6
 image:
   repository: k8s-vga-worker1:5000/group1-team6-cha-hello
   tag: "latest"
