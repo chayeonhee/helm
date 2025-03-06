@@ -43,9 +43,10 @@ pipeline {
             steps {
                 script {
                     // Git 사용자 정보 설정
-                    sh "git config user.name 'Jenkins CI'"
-                    sh "git config user.email 'jenkins@example.com'"
-
+                    // sh "git config user.name 'Jenkins CI'"
+                    // sh "git config user.email 'jenkins@example.com'"
+                    sh "git config user.name 'chayeonhee'"
+                    sh "git config user.email 'chayeonhee1021@gmail.com'"
                     // Helm 차트를 Git 저장소에 푸시
                     sh "git add ."
                     sh "git commit -m 'Update Helm Chart'"
