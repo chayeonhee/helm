@@ -32,5 +32,5 @@ spec:
     - protocol: TCP
       port: 8080 # kube unique inner port
       targetPort: 8099 #listen port, container port, Docker Expose port is equal
-      nodePort: 30690
+      nodePort: 30635
   type: NodePort
