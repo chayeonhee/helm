@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api",method = RequestMethod.GET)
 public class Controller {
-    @Value("${MESSAGE}")
+    @Value("${UI_MESSAGE}")
     private String uiMessage;
 
     @GetMapping("/hi")
