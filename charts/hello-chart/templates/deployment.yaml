@@ -20,5 +20,5 @@ spec:
           ports:
             - containerPort: {{ .Values.service.port }}
           env:
-            - naem: UI_MESSAGE
+            - name: UI_MESSAGE
               value: {{ .Values.app.uiMessage }}
