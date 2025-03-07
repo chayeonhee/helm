@@ -10,7 +10,7 @@ service:
   port: 8099
   nodePort: 30635
 app:
-  uiMessage: "HelloWorld 555"
+  uiMessage: "HelloWorld 666"
 ingress:
   enabled: false
 
