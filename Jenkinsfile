@@ -78,7 +78,7 @@ pipeline {
                         git commit -m "package"
                         
                         # 변경 사항을 원격 저장소에 푸시
-                        git push https://chayeonhee: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@github.com/chayeonhee/helmchart.git main
+                        #git push https://chayeonhee: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@github.com/chayeonhee/helmchart.git main
                     """
                 }
             }
