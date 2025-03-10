@@ -81,7 +81,7 @@ pipeline {
             steps {
                 script {
                     // Helm 차트를 사용하여 Kubernetes에 배포
-                    sh "helm upgrade --install helloworld ./helm-packages/${DOCKER_IMAGE}-${IMAGE_TAG}.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values=${VALUES_FILE_PATH}"
+                    sh "helm upgrade --install helloworld ./helm-packages/${DOCKER_IMAGE}-${IMAGE_TAG}.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values=./charts/${VALUES_FILE_PATH}"
                 }
             }
         }
