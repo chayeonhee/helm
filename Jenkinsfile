@@ -3,7 +3,9 @@ pipeline {
 
     environment {
         GIT_REPO = 'https://github.com/chayeonhee/helm.git'
-        HELM_CHART_DIR = './charts/hello-chart'  // git 내의 Helm 차트 디렉토리
+        HELM_CHART_REPO = 'https://github.com/chayeonhee/helmchart.git'
+        HELM_CHART_DIR = './hellochart'  // git 내의 Helm 차트 디렉토리
+        HELM_REPO_NAME = 'team6-cha-repo'
         DOCKER_REGISTRY = "k8s-vga-worker1:5000"
         DOCKER_IMAGE = "group1-team6-cha-hello"
         IMAGE_TAG = "latest"
@@ -41,14 +43,48 @@ pipeline {
         //         }
         //     }
         // }
-        //  stage('Deploy to Kubernetes (Helm)') {
-        //     steps {
-        //         script {
-        //             // Deploy to Kubernetes via Helm
-        //             sh "helm upgrade --install helloworld ./helm/ --set image.tag=${DOCKER_IMAGE}"
-        //         }
-        //     }
-        // }
+
+        stage('Checkout Helm Chart') {
+            steps {
+                // Helm chart 리포지토리에서 Helm 차트를 클론
+                git url: HELM_CHART_REPO, branch: 'main'
+            }
+        }
+         stage('Add Helm Repo if not exists') {
+            steps {
+                script {
+                    // 이미 리포지토리가 추가되어 있는지 확인
+                    def repoExists = sh(script: "helm repo list | grep ${HELM_REPO_NAME}", returnStatus: true)
+                    
+                    if (repoExists != 0) {
+                        // 리포지토리가 추가되어 있지 않으면 추가
+                        sh "helm repo add ${HELM_REPO_NAME} ${HELM_CHART_REPO}"
+                        sh "helm repo update"
+                    }
+                }
+            }
+        }
+
+         stage('Package Helm Chart') {
+            steps {
+                script {
+                    // Helm 차트 패키징
+                    sh "helm package ${HELM_CHART_DIR} --destination ./helm-packages"
+                }
+            }
+        }
+         stage('Deploy to Kubernetes (Helm)') {
+            // when {
+            //     // src 디렉토리가 변경된 경우에만 실행
+            //     changeset "**/src/**"
+            // }
+            steps {
+                script {
+                    // Helm 차트를 사용하여 Kubernetes에 배포
+                    sh "helm upgrade --install helloworld ./helm-packages/${DOCKER_IMAGE}-${IMAGE_TAG}.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values=${VALUES_FILE_PATH}"
+                }
+            }
+        }
         // stage('Deployment Image to Update') {
         //     steps {
         //         script {
