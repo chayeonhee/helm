@@ -65,6 +65,8 @@ pipeline {
             steps {
                 script {
                     // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
+                    sh 'git config --global user.email "yeonhee1021@gmail.com"'
+                    sh 'git config --global user.name "chayeonhee"'
                     sh """
                         # Git 상태 확인
                         git status
