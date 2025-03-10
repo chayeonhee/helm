@@ -60,6 +60,27 @@ pipeline {
                 }
             }
         }
+        
+         stage('Commit and Push Packaged Chart to Git') {
+            steps {
+                script {
+                    // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
+                    sh """
+                        # Git 상태 확인
+                        git status
+                        
+                        # Helm 패키지 파일을 Git에 추가
+                        git add helm-packages/*.tgz
+                        
+                        # 커밋 메시지 작성
+                        git commit -m "package"
+                        
+                        # 변경 사항을 원격 저장소에 푸시
+                        git push origin main
+                    """
+                }
+            }
+        }
          stage('Deploy to Kubernetes (Helm)') {
             // when {
             //     // src 디렉토리가 변경된 경우에만 실행
