@@ -12,6 +12,7 @@ pipeline {
         NAMESPACE = "group1-team6"
         JAVA_HOME = "/tmp/jdk-21.0.5"
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        GIT_TOKEN="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"
     }
 
     stages {
@@ -78,7 +79,7 @@ pipeline {
                         git commit -m "package"
                         
                         # 변경 사항을 원격 저장소에 푸시
-                        git push https://chayeonhee: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@github.com/chayeonhee/helm.git main
+                        git push https://chayeonhee:${GIT_TOKEN}@github.com/chayeonhee/helmchart.git main
                     """
                 }
             }
