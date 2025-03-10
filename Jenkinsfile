@@ -65,8 +65,8 @@ pipeline {
             steps {
                 script {
                     // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
-                    sh 'git config --global user.email "yeonhee1021@gmail.com"'
-                    sh 'git config --global user.name "chayeonhee"'
+                    // sh 'git config --global user.email "yeonhee1021@gmail.com"'
+                    // sh 'git config --global user.name "chayeonhee"'
                     sh """
                         # Git 상태 확인
                         git status
@@ -78,7 +78,7 @@ pipeline {
                         git commit -m "package"
                         
                         # 변경 사항을 원격 저장소에 푸시
-                        git push origin main
+                        git push https://chayeonhee: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@github.com/chayeonhee/helmchart.git main
                     """
                 }
             }
