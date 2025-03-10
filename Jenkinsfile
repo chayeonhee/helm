@@ -12,9 +12,6 @@ pipeline {
         NAMESPACE = "group1-team6"
         JAVA_HOME = "/tmp/jdk-21.0.5"
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
-        GIT_TOKEN="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"
-        GIT_USER='chayeonhee'
-        GIT_BRANCH='main'
     }
 
     stages {
@@ -55,37 +52,37 @@ pipeline {
         }
          
 
-         stage('Package Helm Chart') {
-            steps {
-                script {
-                    // Helm 차트 패키징
-                    sh "helm package ${HELM_CHART_DIR} --destination ./helm-packages"
-                }
-            }
-        }
+        //  stage('Package Helm Chart') {
+        //     steps {
+        //         script {
+        //             // Helm 차트 패키징
+        //             sh "helm package ${HELM_CHART_DIR} --destination ./helm-packages"
+        //         }
+        //     }
+        // }
         
-         stage('Commit and Push Packaged Chart to Git') {
-            steps {
-                script {
+        //  stage('Commit and Push Packaged Chart to Git') {
+            // steps {
+                // script {
                     // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
-                    sh 'git config --global user.email "yeonhee1021@gmail.com"'
-                    sh 'git config --global user.name "chayeonhee"'
-                    sh """
-                        # Git 상태 확인
-                        git status
+                    // sh 'git config --global user.email "yeonhee1021@gmail.com"'
+                    // sh 'git config --global user.name "chayeonhee"'
+                    // sh """
+                    //     # Git 상태 확인
+                    //     git status
                         
-                        # Helm 패키지 파일을 Git에 추가
-                        git add helm-packages/*.tgz
+                    //     # Helm 패키지 파일을 Git에 추가
+                    //     git add helm-packages/*.tgz
                         
-                        # 커밋 메시지 작성
-                        git commit -m "package"
+                    //     # 커밋 메시지 작성
+                    //     git commit -m "package"
                         
-                        # 변경 사항을 원격 저장소에 푸시
-                        git push https://${GIT_USER}:${GIT_TOKEN}@github.com/chayeonhee/helmchart.git ${GIT_BRANCH}
-                    """
-                }
-            }
-        }
+                    //     # 변경 사항을 원격 저장소에 푸시
+                    //     git push https://${GIT_USER}:${GIT_TOKEN}@github.com/chayeonhee/helmchart.git ${GIT_BRANCH}
+                    // """
+        //         }
+        //     }
+        // }
          stage('Deploy to Kubernetes (Helm)') {
             // when {
             //     // src 디렉토리가 변경된 경우에만 실행
@@ -94,8 +91,8 @@ pipeline {
             steps {
                 script {
                     // Helm 차트를 사용하여 Kubernetes에 배포
-                    // sh "helm upgrade --install hello-world ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values https://raw.githubusercontent.com/chayeonhee/helm/main/charts/values.yaml"
-                    sh "helm upgrade --install hello-world ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} "
+                    sh "helm upgrade --install hello-world ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values https://raw.githubusercontent.com/chayeonhee/helm/main/charts/values.yaml"
+                    // sh "helm upgrade --install hello-world ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} "
                 }
             }
         }
