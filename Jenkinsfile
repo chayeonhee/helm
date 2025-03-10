@@ -58,7 +58,7 @@ pipeline {
                     
                     if (repoExists != 0) {
                         // 리포지토리가 추가되어 있지 않으면 추가
-                        sh "helm repo add ${HELM_REPO_NAME} ${HELM_CHART_REPO}"
+                        sh "helm repo add ${HELM_REPO_NAME} https://chayeonhee.github.io/helmchart/"
                         sh "helm repo update"
                     }
                 }
