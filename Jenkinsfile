@@ -50,20 +50,7 @@ pipeline {
                 git url: HELM_CHART_REPO, branch: 'main'
             }
         }
-         stage('Add Helm Repo if not exists') {
-            steps {
-                script {
-                    // 이미 리포지토리가 추가되어 있는지 확인
-                    def repoExists = sh(script: "helm repo list | grep ${HELM_REPO_NAME}", returnStatus: true)
-                    
-                    if (repoExists != 0) {
-                        // 리포지토리가 추가되어 있지 않으면 추가
-                        sh "helm repo add ${HELM_REPO_NAME} https://chayeonhee.github.io/helmchart/"
-                        sh "helm repo update"
-                    }
-                }
-            }
-        }
+         
 
          stage('Package Helm Chart') {
             steps {
