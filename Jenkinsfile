@@ -68,7 +68,7 @@ pipeline {
             steps {
                 script {
                     // Helm 차트를 사용하여 Kubernetes에 배포
-                    sh "helm upgrade --install helloworld ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values https://raw.githubusercontent.com/chayeonhee/helm/main/charts/values.yaml"
+                    sh "helm upgrade --install springboot-hello-world ./helm-packages/springboot-hello-world-0.1.0.tgz --set image.repository=${DOCKER_REGISTRY}/${DOCKER_IMAGE} --set image.tag=${IMAGE_TAG} --values https://raw.githubusercontent.com/chayeonhee/helm/main/charts/values.yaml"
                 }
             }
         }
