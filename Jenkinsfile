@@ -81,7 +81,7 @@ pipeline {
                         git commit -m "package"
                         
                         # 변경 사항을 원격 저장소에 푸시
-                        git push https://${GIT_USER}:${GIT_TOKEN}@github.com/chayeonhee/helm.git ${GIT_BRANCH}
+                        git push https://${GIT_USER}:${GIT_TOKEN}@github.com/chayeonhee/helmchart.git ${GIT_BRANCH}
                     """
                 }
             }
