@@ -53,39 +53,33 @@ pipeline {
         }
          
 
-         stage('Package Helm Chart') {
-            steps {
-                script {
-                    // Helm 차트 패키징
-                    sh "helm package ${HELM_CHART_DIR} --destination ./helm-packages"
-                }
-            }
-        }
+        //  stage('Package Helm Chart') {
+        //     steps {
+        //         script {
+        //             // Helm 차트 패키징
+        //             sh "helm package ${HELM_CHART_DIR} --destination ./helm-packages"
+        //         }
+        //     }
+        // }
         
-         stage('Commit and Push Packaged Chart to Git') {
-            steps {
-                script {
-                    // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
-                    // withCredentials([usernamePassword(credentialsId: 'team6-cha', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
-                    sh 'git config --global user.email "yeonhee1021@gmail.com"'
-                    sh 'git config --global user.name "chayeonhee"'
-                    // # Git 상태 확인
-                    sh 'git status'
+        //  stage('Commit and Push Packaged Chart to Git') {
+        //     steps {
+        //         script {
+        //             // Git 저장소에 Helm 패키지 파일을 커밋하고 푸시
+        //             sh 'git config --global user.email "yeonhee1021@gmail.com"'
+        //             sh 'git config --global user.name "chayeonhee"'
+        //             // # Git 상태 확인
+        //             sh 'git status'
                         
+        //             // # Helm 패키지 파일을 Git에 추가
+        //             sh 'git add helm-packages/*.tgz'
                         
-                    // # Helm 패키지 파일을 Git에 추가
-                    sh 'git add helm-packages/*.tgz'
+        //             // # 커밋 메시지 작성
+        //             sh 'git commit -m "package"'
                         
-                    // # 커밋 메시지 작성
-                    sh 'git commit -m "package"'
-                        
-                        
-                    // # 변경 사항을 원격 저장소에 푸시
-                        // git push https://${GIT_USER}:${GIT_TOKEN}@github.com/chayeonhee/helmchart.git ${GIT_BRANCH}
-                    // }
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
          stage('Deploy to Kubernetes (Helm)') {
             // when {
             //     // src 디렉토리가 변경된 경우에만 실행
