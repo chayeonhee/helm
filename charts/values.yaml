@@ -8,9 +8,9 @@ image:
 service:
   type: NodePort
   port: 8099
-  nodePort: 30636
+  nodePort: 30637
 app:
-  uiMessage: "HelloWorld 123"
+  uiMessage: "HelloWorld 123444"
 ingress:
   enabled: false
 
